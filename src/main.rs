@@ -1,10 +1,10 @@
-use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
 use sqlx::PgPool;
 use std::net::TcpListener;
 use tracing::dispatcher::set_global_default;
 use tracing::Subscriber;
 use tracing_bunyan_formatter::{BunyanFormattingLayer, JsonStorageLayer};
 use tracing_log::LogTracer;
+use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
 use tracing_subscriber::{EnvFilter, Registry};
 use zero2prod::configuration::get_configuration;
 use zero2prod::startup::run;
