@@ -1,6 +1,6 @@
-use sqlx::{PgPool, PgConnection, Connection, Executor};
-use uuid::Uuid;
+use sqlx::{Connection, Executor, PgConnection, PgPool};
 use std::net::TcpListener;
+use uuid::Uuid;
 use zero2prod::configuration::{get_configuration, DatabaseSettings};
 use zero2prod::startup::run;
 
@@ -45,7 +45,8 @@ async fn configure_database(config: &DatabaseSettings) -> PgPool {
     let mut connection = PgConnection::connect(&config.connection_string_without_db())
         .await
         .expect("Failed to connect to Postgres");
-    connection.execute(format!(r#"CREATE DATABASE "{}";"#, config.database_name).as_str())
+    connection
+        .execute(format!(r#"CREATE DATABASE "{}";"#, config.database_name).as_str())
         .await
         .expect("Failed to create database.");
 
